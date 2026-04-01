@@ -22,6 +22,7 @@ const INITIAL_TASKS = [
 ]
 
 export function useTasks() {
+  // รีเฟรชหน้าแล้วข้อมูลยังอยู่
   const [tasks, setTasks] = useState(() => {
     try {
       const saved = localStorage.getItem('tasks')
@@ -31,6 +32,7 @@ export function useTasks() {
     }
   })
 
+  // หาว่า id ถัดไปควรเป็นเลขอะไร
   const [nextId, setNextId] = useState(() => {
     try {
       const saved = localStorage.getItem('tasks')
@@ -41,10 +43,12 @@ export function useTasks() {
     }
   })
 
+  // ทุกครั้งที่ tasks เปลี่ยน จะเซฟลง localStorage อัตโนมัติ
   useEffect(() => {
     localStorage.setItem('tasks', JSON.stringify(tasks))
   }, [tasks])
 
+  // สร้าง task ใหม่
   const addTask = (data) => {
     const newTask = {
       id: nextId,
@@ -63,6 +67,7 @@ export function useTasks() {
     setTasks((prev) => prev.filter((t) => t.id !== id))
   }
 
+  // ใช้ตอนกด checkbox เปลี่ยนสถานะ
   const toggleStatus = (id) => {
     setTasks((prev) =>
       prev.map((t) =>

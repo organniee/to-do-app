@@ -1,7 +1,7 @@
 import TaskCard from './TaskCard'
 
-
 export default function TaskList({ tasks, filter, onEdit, onDelete, onToggle }) {
+  // filter ข้อมูล
   const filtered = tasks.filter((t) => filter === 'all' || t.status === filter)
 
   if (!filtered.length) {
